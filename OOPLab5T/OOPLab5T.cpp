@@ -106,4 +106,51 @@ int main() {
     
     return 0;
 }
+
+//task2
+
+#include <iostream>
+using namespace std;
+
+class Window {
+public:
+    virtual void draw() {
+        cout << "Window" << endl;
+    }
+};
+
+class TitledWindow : public Window {
+public:
+    void draw() {
+        cout << "Titled Window" << endl;
+    }
+};
+
+class ButtonWindow : public TitledWindow {
+public:
+    void draw() {
+        cout << "Button Window" << endl;
+    }
+};
+
+int main() {
+    Window* w1 = new Window();
+    w1->draw();
+    delete w1;
+    cout << endl;
+
+    Window* w2 = new TitledWindow();
+    w2->draw();
+    delete w2;
+    cout << endl;
+
+    Window* w3 = new ButtonWindow();
+    w3->draw();
+    delete w3;
+    cout << endl;
+
+    return 0;
+}
+
+
 }
