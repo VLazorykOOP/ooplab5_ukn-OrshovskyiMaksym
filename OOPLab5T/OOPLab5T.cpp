@@ -152,5 +152,100 @@ int main() {
     return 0;
 }
 
+//task 3
+// Оголошення класу "Студент"
+class Student {
+public:
+// Конструктор за замовчуванням
+Student() {}
+// Конструктор з параметрами
+Student(std::string name, int age, std::string group)
+    : name_(name), age_(age), group_(group) {}
 
+// Конструктор копіювання
+Student(const Student& other)
+    : name_(other.name_), age_(other.age_), group_(other.group_) {}
+
+// Оператор присвоювання
+Student& operator=(const Student& other) {
+    if (this != &other) {
+        name_ = other.name_;
+        age_ = other.age_;
+        group_ = other.group_;
+    }
+    return *this;
+}
+
+// Деструктор
+virtual ~Student() {}
+
+// Функції для отримання значень полів
+std::string getName() const { return name_; }
+int getAge() const { return age_; }
+std::string getGroup() const { return group_; }
+
+// Функція для виведення даних у потік
+virtual void print(std::ostream& os) const {
+    os << "Name: " << name_ << std::endl;
+    os << "Age: " << age_ << std::endl;
+    os << "Group: " << group_ << std::endl;
+}
+
+// Функція для введення даних з потоку
+virtual void read(std::istream& is) {
+    std::cout << "Enter name: ";
+    is >> name_;
+    std::cout << "Enter age: ";
+    is >> age_;
+    std::cout << "Enter group: ";
+    is >> group_;
+}
+private:
+std::string name_;
+int age_;
+std::string group_;
+};
+
+// Оголошення класу "Студент дипломник"
+class GraduateStudent : public Student {
+public:
+// Конструктор за замовчуванням
+GraduateStudent() {}
+
+// Конструктор з параметрами
+GraduateStudent(std::string name, int age, std::string group, std::string thesis)
+    : Student(name, age, group), thesis_(thesis) {}
+
+// Конструктор копіювання
+GraduateStudent(const GraduateStudent& other)
+    : Student(other), thesis_(other.thesis_) {}
+
+// Оператор присвоювання
+GraduateStudent& operator=(const GraduateStudent& other) {
+    if (this != &other) {
+        Student::operator=(other);
+        thesis_ = other.thesis_;
+    }
+    return *this;
+}
+
+// Функція для виведення даних у потік
+void print(std::ostream& os) const override {
+    Student::print(os);
+    os << "Thesis: " << thesis_ << std::endl;
+}
+
+// Функція для введення даних з потоку
+void read(std::istream& is) override {
+    Student::read(is);
+    std::cout << "Enter thesis: ";
+    is >> thesis_;
+}
+private:
+std::string thesis_;
+};
+
+int main() {
+// Створення об'єкту класу "Студент"
+}
 }
